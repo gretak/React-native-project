@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Modal, AppRegistry, TouchableHighlight, StyleSheet, Image, Text, View, Button } from 'react-native';
 
 var MOCKED_MOVIES_DATA = [
-  {title: 'Title', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
+  { title: 'Title',
+    year: '2015',
+    posters: {
+      thumbnail: 'http://i.imgur.com/UePbdph.jpg'
+    }
+  },
 ];
 
 export default class AwesomeProject extends Component {
@@ -22,7 +27,6 @@ export default class AwesomeProject extends Component {
     return (
       <View style={{flex: 1}}>
 
-      //modal setup
         <Modal
           animationType={"fade"}
           transparent={false}
@@ -30,10 +34,8 @@ export default class AwesomeProject extends Component {
           onRequestClose={() => {alert("Modal has been closed.")}}
           >
 
-         <View style={{marginTop: 22}}>
-
+         <View style={styles.containerMain}>
             <View>
-               <Text style={styles.modal}>Hello World!</Text>
                <TouchableHighlight onPress={() => {
                  this.setModalVisible(!this.state.modalVisible)
                }}>
@@ -42,15 +44,17 @@ export default class AwesomeProject extends Component {
             </View>
 
             <View style={styles.container}>
-              <Text style={styles.modal}>{movie.title}</Text>
-              <Text style={styles.modal}>{movie.year}</Text>
-              <Image source={{uri: movie.posters.thumbnail}} 
+              <Image 
+                source={{uri: movie.posters.thumbnail}} 
                 style={styles.thumbnail}
-                />
+              />
+              <View style={styles.rightContainer}>
+                <Text style={styles.title}>{movie.title}</Text>
+                <Text style={styles.year}>{movie.year}</Text>
+              </View>
             </View>
 
          </View>
-
         </Modal>
 
         <View style={{flex: 1, backgroundColor: 'steelblue'}}/>
@@ -62,7 +66,6 @@ export default class AwesomeProject extends Component {
 
           <View style={{flex: 1, backgroundColor: 'skyblue'}}>
 
-          //just testing the data from movies array
             <Text style={styles.modal}>{movie.year}</Text>
             <Button
             onPress={() => {this.setModalVisible(true) }}
@@ -87,10 +90,32 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  containerMain: {
+    flex: 1,
+    //flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  rightContainer: {
+    flex: 1,
   },
   thumbnail: {
     width: 53,
     height: 81,
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'center',
   },
 });
 
